@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nip',20);
-            $table->string('nama',30);
+            $table->string('nama',100);
             $table->text('alamat');
             $table->string('telp',15);
             $table->enum('jk',['L','P']);

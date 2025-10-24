@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jabatans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nama',35);
+            $table->string('nama',100);
         });
     }
 

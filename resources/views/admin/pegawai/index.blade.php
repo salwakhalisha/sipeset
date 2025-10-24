@@ -36,8 +36,8 @@
                           <td>{{$pgw['alamat']}}</td>
                           <td>{{$pgw['telp']}}</td>
                           <td>{{$pgw['jk']}}</td>
-                          <!-- <td>{{$pgw['']}}</td>
-                          <td>{{$pgw['nama']}}</td> -->
+                          <td>{{ $pgw->jabatan ? $pgw->jabatan->nama : 'Data tidak ditemukan' }}</td>
+                          <td>{{ $pgw->unitkerja ? $pgw->unitkerja->nama : 'Data tidak ditemukan' }}</td>
 
                           <td>
                             <a href="{{route('pegawai.edit',$pgw['id'])}}" class="btn btn-warning btn-sm">Edit</a>

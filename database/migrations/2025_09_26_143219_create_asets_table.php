@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('asets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nama',50);
+            $table->string('nama',100);
             $table->enum('status', ['Tersedia', 'Dipinjam', 'Diperbaiki']);
             $table->string('lokasi',50);
             $table->enum('kondisi', ['Baik', 'Rusak Ringan', 'Rusak Berat']);
