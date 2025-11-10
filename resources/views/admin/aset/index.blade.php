@@ -36,11 +36,11 @@
                           <td>{{$at['kondisi']}}</td>
                           <td>
                             <a href="{{route('aset.edit',$at['id'])}}" class="btn btn-warning btn-sm">Edit</a>
-                            <!-- <form action="{{route('aset.delete',$at['id'])}}" method="POST" class="d-inline">
+                            <form action="{{route('aset.delete',$at['id'])}}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form> -->
+                            </form>
                           </td>
                           </tr>
                           @endforeach

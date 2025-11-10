@@ -7,10 +7,13 @@
                   <div class="card-body">
                     <h4 class="card-title">Data Unit Kerja</h4>
 
-                    
-                        <a href="{{route('unitkerja.create')}}" class="btn btn-danger btn-icon-text">
-                        <i class="mdi mdi-upload btn-icon-prepend"></i> Upload</a>
-                    
+                    <form action="{{ route('unitkerja.store') }}" method="POST">
+                      @csrf
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Unit Kerja">
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
                     
                     <div class="table-responsive pt-3">
                       <table class="table table-bordered">
@@ -28,11 +31,6 @@
                           <td>{{$j['nama']}}</td>
                           <td>
                             <a href="{{route('unitkerja.edit',$j['id'])}}" class="btn btn-warning btn-sm">Edit</a>
-                            <!-- <form action="{{route('unitkerja.delete',$j['id'])}}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form> -->
                           </td>
                           </tr>
                           @endforeach

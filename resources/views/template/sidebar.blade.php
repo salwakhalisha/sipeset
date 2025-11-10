@@ -60,6 +60,12 @@
                     <span>Data Pegawai</span></a>
             </li>
 
+            <li class="nav-item active">
+                <a class="nav-link" nav-item menu-items {{$menu === 'konfirmasi' ? 'active' : ''}} href="{{ route('admin.konfirmasi.index') }}">
+                    <i class="fas fa-database"></i>
+                    <span>Konfirmasi Peminjaman</span></a>
+            </li>
+
             <!-- Divider -->
 
             <!-- Divider -->

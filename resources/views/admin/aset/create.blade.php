@@ -20,7 +20,6 @@
                     <select name="status" class="form-control">
                         <option value=""> Pilih Status </option>
                         <option value="Tersedia">Tersedia</option>
-                        <option value="Dipinjam">Dipinjam</option>
                         <option value="Diperbaiki">Diperbaiki</option>
                     </select>
                 </div>

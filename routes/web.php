@@ -5,17 +5,24 @@ use App\Http\Controllers\AsetController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UnitkerjaController;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\Admin\KonfirmasiController;
+use App\Http\Controllers\DashboardPegawaiController;
+use App\Http\Controllers\Pegawai\MeminjamController;
 
 // Route::get('/', function () {
 //     return view('utama.welcome');
 // });
 
 
-Route::get('/dashboardadmin', [DashboardController::class, 'dashboard'])->name('dashboard.admin');
-Route::get('/index', [DashboardController::class, 'dashboard'])->name('index');
+Route::get('/dashboardadmin', [DashboardAdminController::class, 'dashboard'])->name('dashboard.admin');
+Route::get('/index', [DashboardAdminController::class, 'dashboard'])->name('index');
+
+Route::get('/dashboardpegawai', [DashboardPegawaiController::class, 'dashboard'])->name('dashboard.pegawai');
+Route::get('/index', [DashboardPegawaiController::class, 'dashboard'])->name('index');
 
 Route::view('/', 'utama.index');
 
@@ -57,3 +64,19 @@ Route::post('/pegawai', [PegawaiController::class, 'store'])->name('pegawai.stor
 Route::get('/pegawai/{pegawai}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
 Route::put('/pegawai/{pegawai}', [PegawaiController::class, 'update'])->name('pegawai.update');
 Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy'])->name('pegawai.delete');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('pegawai.profile');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    // Pegawai
+    Route::get('/meminjam', [MeminjamController::class, 'index'])->name('pegawai.meminjam.index');
+    Route::get('/meminjam/create', [MeminjamController::class, 'create'])->name('pegawai.meminjam.create');
+    Route::post('/meminjam', [MeminjamController::class, 'store'])->name('pegawai.meminjam.store');
+
+    Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('admin.konfirmasi.index');
+    Route::put('/konfirmasi/{id}', [KonfirmasiController::class, 'update'])->name('admin.konfirmasi.update');
+});

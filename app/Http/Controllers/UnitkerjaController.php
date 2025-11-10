@@ -19,7 +19,7 @@ public function index()
 
     public function create()
     {
-        return view('admin.unitkerja.create', 
+        return view('admin.unitkerja.index', 
         [
             "menu"=> "unitkerja"
         ]);

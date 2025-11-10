@@ -2,9 +2,30 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class meminjam extends Model
+class Meminjam extends Model
 {
-    //
+    use HasFactory;
+    
+    protected $table = 'meminjams';
+
+    protected $fillable = [
+        'aset_id',
+        'pegawai_id',
+        'status',
+        'tanggal',
+        'keterangan',
+    ];
+
+    public function aset()
+    {
+        return $this->belongsTo(Aset::class);
+    }
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class);
+    }
 }

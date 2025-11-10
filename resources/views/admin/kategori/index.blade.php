@@ -7,10 +7,14 @@
                   <div class="card-body">
                     <h4 class="card-title">Data Kategori Aset</h4>
 
-                    
-                        <a href="{{route('kategori.create')}}" class="btn btn-danger btn-icon-text">
-                        <i class="mdi mdi-upload btn-icon-prepend"></i> Upload</a>
-                    
+                    <form action="{{ route('kategori.store') }}" method="POST">
+                      @csrf
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Kategori Aset">
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                      
+                    </form>
                     
                     <div class="table-responsive pt-3">
                       <table class="table table-bordered">

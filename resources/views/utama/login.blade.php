@@ -29,13 +29,26 @@
     @if(Auth::check() && Auth::user()->role == 'admin')
         <script>window.location = "{{ route('dashboard.admin') }}";</script>
     @endif
-
+ 
+     @if(Auth::check() && Auth::user()->role == 'pegawai')
+        <script>window.location = "{{ route('dashboard.pegawai') }}";</script>
+    @endif
     <div class="container">
         <div class="login-card card shadow-lg border-0">
             <div class="card-body">
                 <div class="text-center mb-4">
                     <img src="{{ asset('dist/img/login-bg.png') }}" alt="SIPESET Logo" class="logo-login">
                 </div>
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
 
                 <!-- Form Login -->
                 <form method="POST" action="{{ route('login') }}" class="user">

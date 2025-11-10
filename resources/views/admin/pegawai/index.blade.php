@@ -8,7 +8,7 @@
                     <h4 class="card-title">Data Pegawai</h4>
 
                     
-                        <a href="{{route('pegawai.create')}}" class="btn btn-danger btn-icon-text">
+                        <a href="{{route('pegawai.create')}}" class="btn btn-primary btn-icon-text">
                         <i class="mdi mdi-upload btn-icon-prepend"></i> Upload</a>
                     
                     
@@ -41,11 +41,12 @@
 
                           <td>
                             <a href="{{route('pegawai.edit',$pgw['id'])}}" class="btn btn-warning btn-sm">Edit</a>
-                            <!-- <form action="{{route('pegawai.delete',$pgw['id'])}}" method="POST" class="d-inline">
+
+                            <form action="{{route('pegawai.delete',$pgw['id'])}}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form> -->
+                            </form>
                           </td>
                           </tr>
                           @endforeach

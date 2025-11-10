@@ -19,7 +19,7 @@ class JabatanController extends Controller
 
     public function create()
     {
-        return view('admin.jabatan.create', 
+        return view('admin.jabatan.index', 
         [
             "menu"=> "jabatan"
         ]);

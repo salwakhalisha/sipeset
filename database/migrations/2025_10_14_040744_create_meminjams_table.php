@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('aset_id')->constrained('asets')->onDelete('cascade');
             $table->foreignId('pegawai_id')->constrained('pegawais')->onDelete('cascade');
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
             $table->date('tanggal');
             $table->string('keterangan');
         });
