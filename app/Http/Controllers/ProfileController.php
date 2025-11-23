@@ -42,13 +42,6 @@ class ProfileController extends Controller
         ]);
 
 
-        // $user->username = $validated['username'];
-        // if (!empty($validated['password'])) {
-        //     $user->password = Hash::make($validated['password']);
-        // }
-        // $user->save();
-
-
         $pegawai = Pegawai::where('user_id', $user->id)->first();
         if ($pegawai) {
             $pegawai->nama = $validated['nama'];

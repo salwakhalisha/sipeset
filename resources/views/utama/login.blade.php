@@ -40,9 +40,9 @@
                     <img src="{{ asset('dist/img/login-bg.png') }}" alt="SIPESET Logo" class="logo-login">
                 </div>
 
-                @if (session('error'))
+                @if (session('loginError'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
+                        {{ session('loginError') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

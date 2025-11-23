@@ -13,16 +13,15 @@ class DashboardAdminController extends Controller
     {
         $kategoriaset = kategori::count();
         $aset = aset::count();
-        $meminjam = Meminjam::count();
-
-        $jumlahKonfirmasi = Meminjam::where('status', 'pending')->count();
+        $totalDipinjam = Meminjam::where('status', 'disetujui')->count();
+        $menungguKonfirmasi = Meminjam::where('status', 'menunggu')->count();
 
         return view('admin.index', [
             'menu' => 'home',
             'kategoriaset' => $kategoriaset,
             'aset' => $aset,
-            'meminjam' => $meminjam,
-            'jumlahKonfirmasi' => $jumlahKonfirmasi, 
+            'totalDipinjam' => $totalDipinjam,
+            'menungguKonfirmasi' => $menungguKonfirmasi,
         ]);
     }
 

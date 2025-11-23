@@ -28,4 +28,15 @@ class Meminjam extends Model
     {
         return $this->belongsTo(Pegawai::class);
     }
+
+    public function mengembalikan()
+    {
+        return $this->hasOne(Mengembalikan::class);
+    }
+
+    public function scopeConfirmedAndNotReturned($query)
+    {
+        return $query->where('status', 'disetujui')
+                    ->whereDoesntHave('mengembalikan');
+    }   
 }

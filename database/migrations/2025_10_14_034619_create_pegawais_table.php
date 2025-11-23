@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
      public function up(): void
     {
         Schema::create('pegawais', function (Blueprint $table) {
@@ -21,15 +19,13 @@ return new class extends Migration
             $table->enum('jk',['L','P']);
             $table->string('username',30);
             $table->string('password',100);
+            $table->string('foto')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('jabatan_id')->constrained('jabatans')->onDelete('cascade');
             $table->foreignId('unitkerja_id')->constrained('unitkerjas')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pegawais');

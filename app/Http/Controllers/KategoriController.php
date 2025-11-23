@@ -62,11 +62,4 @@ class KategoriController extends Controller
 
         return redirect()->route('kategori.index');
     }
-    public function destroy($id)
-    {
-        $kategori = kategori::find($id);
-        $kategori->delete();
-
-        return redirect()->route('kategori.index');
-    }
 }

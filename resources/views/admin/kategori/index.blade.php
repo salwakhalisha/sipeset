@@ -13,9 +13,18 @@
                           <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Kategori Aset">
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                      
                     </form>
                     
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+
                     <div class="table-responsive pt-3">
                       <table class="table table-bordered">
                         <thead>

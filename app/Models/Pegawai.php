@@ -22,7 +22,6 @@ class Pegawai extends Model
         'unitkerja_id',
     ];
 
-    // Relasi ke model lain
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -38,9 +37,4 @@ class Pegawai extends Model
         return $this->belongsTo(Unitkerja::class);
     }
 
-    // // (Opsional) jika ingin password otomatis di-hash saat disimpan
-    // public function setPasswordAttribute($value)
-    // {
-    //     $this->attributes['password'] = bcrypt($value);
-    // }
 }

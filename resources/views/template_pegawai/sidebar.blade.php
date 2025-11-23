@@ -33,8 +33,14 @@
             
             <li class="nav-item active">
                 <a class="nav-link" nav-item menu-items {{$menu === 'meminjam' ? 'active' : ''}} href="{{ route('pegawai.meminjam.index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-plus"></i>
                     <span>Peminjaman</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" nav-item menu-items {{$menu === 'mengembalikan' ? 'active' : ''}} href="{{ route('mengembalikan.index') }}">
+                    <i class="fas fa-minus"></i>
+                    <span>Pengembalian</span></a>
             </li>
             
 

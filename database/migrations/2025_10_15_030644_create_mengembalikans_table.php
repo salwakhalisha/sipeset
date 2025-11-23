@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('mengembalikans', function (Blueprint $table) {
@@ -17,13 +15,10 @@ return new class extends Migration
             $table->foreignId('meminjam_id')->constrained('meminjams')->onDelete('cascade');
             $table->date('tanggal');
             $table->enum('kondisi', ['baik', 'rusak ringan','rusak berat', 'hilang']);
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('mengembalikans');

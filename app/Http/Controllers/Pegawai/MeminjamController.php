@@ -12,16 +12,19 @@ use Illuminate\Support\Facades\Auth;
 class MeminjamController extends Controller
 {
     public function index()
-    {
-        $pegawai = Pegawai::where('user_id', Auth::id())->first();
+{
+    $pegawai = Pegawai::where('user_id', Auth::id())->first();
 
-        $meminjams = Meminjam::with(['aset'])
-            ->where('pegawai_id', $pegawai->id)
-            ->latest()
-            ->get();
+    $meminjams = Meminjam::with(['aset'])
+        ->where('pegawai_id', $pegawai->id)
+        ->latest()
+        ->get();
 
-        return view('pegawai.meminjam.index', compact('meminjams'));
-    }
+    // Tambahkan ini supaya $asets tersedia di view
+    $asets = Aset::all();
+
+    return view('pegawai.meminjam.index', compact('meminjams', 'asets'));
+}
 
     public function create()
     {

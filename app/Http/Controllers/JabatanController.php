@@ -61,11 +61,4 @@ class JabatanController extends Controller
 
         return redirect()->route('jabatan.index');
     }
-    public function destroy($id)
-    {
-        $jabatan = jabatan::find($id);
-        $jabatan->delete();
-
-        return redirect()->route('jabatan.index');
-    }
 }

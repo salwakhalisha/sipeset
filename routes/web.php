@@ -8,21 +8,19 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UnitkerjaController;
+use App\Http\Controllers\MengembalikanController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\PegawaiPasswordController;
 use App\Http\Controllers\Admin\KonfirmasiController;
 use App\Http\Controllers\DashboardPegawaiController;
 use App\Http\Controllers\Pegawai\MeminjamController;
-
-// Route::get('/', function () {
-//     return view('utama.welcome');
-// });
-
 
 Route::get('/dashboardadmin', [DashboardAdminController::class, 'dashboard'])->name('dashboard.admin');
 Route::get('/index', [DashboardAdminController::class, 'dashboard'])->name('index');
 
 Route::get('/dashboardpegawai', [DashboardPegawaiController::class, 'dashboard'])->name('dashboard.pegawai');
 Route::get('/index', [DashboardPegawaiController::class, 'dashboard'])->name('index');
+Route::get('/pegawai/dashboard', [DashboardPegawaiController::class, 'index'])->name('pegawai.dashboard');
 
 Route::view('/', 'utama.index');
 
@@ -64,6 +62,14 @@ Route::post('/pegawai', [PegawaiController::class, 'store'])->name('pegawai.stor
 Route::get('/pegawai/{pegawai}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
 Route::put('/pegawai/{pegawai}', [PegawaiController::class, 'update'])->name('pegawai.update');
 Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy'])->name('pegawai.delete');
+Route::get('/pegawai/{pegawai}', [PegawaiController::class, 'show'])->name('pegawai.show');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/pegawai/password', [PegawaiPasswordController::class, 'edit'])
+        ->name('pegawai.edit_password');
+    Route::put('/pegawai/password', [PegawaiPasswordController::class, 'update'])
+        ->name('pegawai.update_password');
+});
 
 
 Route::middleware(['auth'])->group(function () {
@@ -80,3 +86,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('admin.konfirmasi.index');
     Route::put('/konfirmasi/{id}', [KonfirmasiController::class, 'update'])->name('admin.konfirmasi.update');
 });
+
+Route::get('aset/export/excel', [AsetController::class, 'exportExcel'])->name('aset.export.excel');
+Route::get('aset/export/pdf', [AsetController::class, 'exportPDF'])->name('aset.export.pdf');
+Route::get('/aset/filter', [AsetController::class, 'filter'])->name('aset.filter');
+
+Route::get('/mengembalikan', [MengembalikanController::class, 'index'])->name('mengembalikan.index');
+Route::get('/mengembalikan/create', [MengembalikanController::class, 'create'])->name('mengembalikan.create');
+Route::post('/mengembalikan', [MengembalikanController::class, 'store'])->name('mengembalikan.store');
+Route::get('/mengembalikan/{mengembalikan}/edit', [MengembalikanController::class, 'edit'])->name('mengembalikan.edit');
+Route::put('/mengembalikan/{mengembalikan}', [MengembalikanController::class, 'update'])->name('mengembalikan.update');
+Route::delete('/mengembalikan/{mengembalikan}', [MengembalikanController::class, 'destroy'])->name('mengembalikan.destroy');

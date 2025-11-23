@@ -3,7 +3,7 @@
 
 @section('konten')
 <style>
-    /* 🌈 Gaya seragam & modern */
+    /* 🌈 Gaya seragam & modern (Full Blue Theme) */
     .dashboard-card {
         border: none;
         border-radius: 1rem;
@@ -19,21 +19,21 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
+    /* 💙 Tema biru untuk semua kartu */
     .dashboard-bg-primary {
-        background: linear-gradient(135deg, #4e73df, #224abe);
+        background: linear-gradient(135deg, #007bff, #0056b3);
     }
 
     .dashboard-bg-success {
-        background: linear-gradient(135deg, #1cc88a, #0f7653);
+        background: linear-gradient(135deg, #33b1ff, #007bff);
     }
 
     .dashboard-bg-info {
-        background: linear-gradient(135deg, #36b9cc, #117a8b);
+        background: linear-gradient(135deg, #4dabf7, #1e90ff);
     }
 
-    /* 🧡 Warna oranye untuk konfirmasi */
     .dashboard-bg-warning {
-        background: linear-gradient(135deg, #f6c23e, #e0a800);
+        background: linear-gradient(135deg, #80d0ff, #33b1ff);
     }
 
     .dashboard-title {
@@ -52,7 +52,7 @@
 
     .dashboard-icon {
         font-size: 3rem;
-        opacity: 0.3;
+        opacity: 0.25;
         position: absolute;
         bottom: 15px;
         right: 20px;
@@ -89,7 +89,7 @@
 
     .chart-title {
         font-weight: 700;
-        color: #4e73df;
+        color: #007bff;
         margin-bottom: 0.75rem;
         font-size: 1rem;
     }
@@ -129,7 +129,7 @@
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <div class="dashboard-title">Aset Dipinjam</div>
-                <div class="dashboard-value">{{ $meminjam }}</div>
+                <div class="dashboard-value">{{ $totalDipinjam }}</div>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width: 50%"></div>
                 </div>
@@ -138,12 +138,12 @@
         </div>
     </div>
 
-    <!-- 🧡 Menunggu Konfirmasi -->
+    <!-- Menunggu Konfirmasi -->
     <div class="card dashboard-card dashboard-bg-warning shadow-sm">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <div class="dashboard-title">Menunggu Konfirmasi</div>
-                <div class="dashboard-value">{{ $jumlahKonfirmasi }}</div>
+                <div class="dashboard-value">{{ $menungguKonfirmasi }}</div>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width: 60%"></div>
                 </div>
@@ -163,65 +163,65 @@
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('asetChart').getContext('2d');
+const ctx = document.getElementById('asetChart').getContext('2d');
 
-    new Chart(ctx, {
-        type: 'bar', // bar lebih jelas untuk perbandingan
-        data: {
-            labels: ['Kategori Aset', 'Total Aset', 'Aset Dipinjam', 'Menunggu Konfirmasi'],
-            datasets: [{
-                label: 'Jumlah',
-                data: [
-                    {{ $kategoriaset }},
-                    {{ $aset }},
-                    {{ $meminjam }},
-                    {{ $jumlahKonfirmasi }}
-                ],
-                backgroundColor: [
-                    'rgba(78, 115, 223, 0.8)',   // biru
-                    'rgba(28, 200, 138, 0.8)',   // hijau
-                    'rgba(54, 185, 204, 0.8)',   // biru muda
-                    'rgba(246, 194, 62, 0.8)'    // oranye
-                ],
-                borderColor: [
-                    '#4e73df',
-                    '#1cc88a',
-                    '#36b9cc',
-                    '#f6c23e'
-                ],
-                borderWidth: 2,
-                borderRadius: 6,
-                hoverBackgroundColor: [
-                    'rgba(78, 115, 223, 1)',
-                    'rgba(28, 200, 138, 1)',
-                    'rgba(54, 185, 204, 1)',
-                    'rgba(246, 194, 62, 1)'
-                ]
-            }]
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Kategori Aset', 'Total Aset', 'Aset Dipinjam', 'Menunggu Konfirmasi'],
+        datasets: [{
+            label: 'Jumlah',
+            data: [
+                {{ $kategoriaset }},
+                {{ $aset }},
+                {{ $totalDipinjam }},
+                {{ $menungguKonfirmasi }}
+            ],
+            backgroundColor: [
+                'rgba(0, 123, 255, 0.8)',   // Biru utama
+                'rgba(51, 153, 255, 0.8)',  // Biru lembut
+                'rgba(0, 105, 217, 0.8)',   // Biru gelap
+                'rgba(102, 178, 255, 0.8)'  // Biru pastel
+            ],
+            borderColor: [
+                '#0056b3',
+                '#007bff',
+                '#004085',
+                '#33b1ff'
+            ],
+            borderWidth: 2,
+            borderRadius: 6,
+            hoverBackgroundColor: [
+                'rgba(0, 123, 255, 1)',
+                'rgba(51, 153, 255, 1)',
+                'rgba(0, 105, 217, 1)',
+                'rgba(102, 178, 255, 1)'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+            duration: 1000,
+            easing: 'easeOutQuart'
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                duration: 1000,
-                easing: 'easeOutQuart'
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
-                }
-            },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: '#4e73df',
-                    titleColor: '#fff',
-                    bodyColor: '#fff',
-                    cornerRadius: 8,
-                }
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1 }
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: '#007bff',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                cornerRadius: 8,
             }
         }
-    });
+    }
+});
 </script>
 @endsection

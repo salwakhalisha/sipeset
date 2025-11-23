@@ -6,7 +6,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Jabatan</h4>
-                    
+  
                 <form action="{{ route('jabatan.store') }}" method="POST">
                   @csrf
                     <div class="form-group">
@@ -15,6 +15,15 @@
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                 </form>
+
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
 
                     <div class="table-responsive pt-3">
                       <table class="table table-bordered">

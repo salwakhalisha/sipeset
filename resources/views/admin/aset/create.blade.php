@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <label>Nama Aset</label>
-                    <input type="text" name="nama" class="form-control" value="{{ old('nama') }}">
+                    <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Aset" value="{{ old('nama') }}">
                 </div>
 
                 <div class="form-group">
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label>Lokasi</label>
-                    <input type="text" name="lokasi" class="form-control" value="{{ old('lokasi') }}">
+                        <input type="text" name="lokasi" class="form-control" placeholder="Masukkan Lokasi" value="{{ old('lokasi') }}">
                 </div>
 
                 <div class="form-group">

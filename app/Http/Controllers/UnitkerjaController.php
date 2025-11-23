@@ -61,11 +61,4 @@ public function index()
 
         return redirect()->route('unitkerja.index');
     }
-    public function destroy($id)
-    {
-        $unitkerja = unitkerja::find($id);
-        $unitkerja->delete();
-
-        return redirect()->route('unitkerja.index');
-    }
 }
