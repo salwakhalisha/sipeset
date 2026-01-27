@@ -1,5 +1,18 @@
 @extends('template_pegawai.layouts')
 
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 <div class="container py-5">
     <div class="card shadow-sm border-0" style="border-radius:0;">

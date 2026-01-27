@@ -8,11 +8,18 @@ use Illuminate\Support\Facades\Crypt;
 
 class PegawaiPasswordController extends Controller
 {
-    // Menampilkan form ubah password
-    public function edit()
+    // Menampilkan halaman ubah password
+    public function index()
     {
         $pegawai = Auth::user()->pegawai;
-        $passwordLama = $pegawai->password ? Crypt::decryptString($pegawai->password) : '';
+
+        if (!$pegawai) {
+            abort(404, 'Data pegawai tidak ditemukan');
+        }
+
+        // Jangan decrypt password lama untuk alasan keamanan
+        $passwordLama = '';
+
         return view('pegawai.password', compact('pegawai', 'passwordLama'));
     }
 
@@ -21,14 +28,20 @@ class PegawaiPasswordController extends Controller
     {
         $pegawai = Auth::user()->pegawai;
 
+        if (!$pegawai) {
+            abort(404, 'Data pegawai tidak ditemukan');
+        }
+
         $request->validate([
             'new_password' => 'required|min:6|confirmed',
         ]);
 
-        $pegawai->password = Crypt::encryptString($request->new_password);
+        $encryptedPassword = Crypt::encryptString($request->new_password);
+
+        $pegawai->password = $encryptedPassword;
 
         if ($pegawai->user) {
-            $pegawai->user->password = Crypt::encryptString($request->new_password);
+            $pegawai->user->password = $encryptedPassword;
             $pegawai->user->save();
         }
 

@@ -64,12 +64,9 @@ Route::put('/pegawai/{pegawai}', [PegawaiController::class, 'update'])->name('pe
 Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy'])->name('pegawai.delete');
 Route::get('/pegawai/{pegawai}', [PegawaiController::class, 'show'])->name('pegawai.show');
 
-Route::middleware('auth')->group(function() {
-    Route::get('/pegawai/password', [PegawaiPasswordController::class, 'edit'])
-        ->name('pegawai.edit_password');
-    Route::put('/pegawai/password', [PegawaiPasswordController::class, 'update'])
-        ->name('pegawai.update_password');
-});
+Route::get('/password', [PegawaiPasswordController::class, 'index'])->name('pegawai.edit_password');
+Route::put('/password', [PegawaiPasswordController::class, 'update'])->name('pegawai.update_password');
+
 
 
 Route::middleware(['auth'])->group(function () {

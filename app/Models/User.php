@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class);
+    }
+
 }

@@ -1,5 +1,18 @@
 @extends('template.layouts')
 
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 <div class="container py-5">
     <div class="card shadow-lg border-0 rounded-4">

@@ -1,5 +1,19 @@
 @extends ('template.layouts')
 @section ('title', 'unitkerja')
+
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section ('konten')
 
 <div class="col-lg-12 grid-margin stretch-card">

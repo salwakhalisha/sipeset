@@ -62,10 +62,7 @@ class PegawaiController extends Controller
 
 
         $namaFoto = null;
-
-        // =========================
-        // SIMPAN FOTO TANPA STORAGE
-        // =========================
+        //simpan foto tanpa storage
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
             $foto = $request->file('foto');
             $namaFoto = time() . '_' . $foto->getClientOriginalName();

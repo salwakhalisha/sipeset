@@ -1,5 +1,19 @@
 @extends ('template.layouts')
 @section ('title', 'Data Aset')
+
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section ('konten')
 
 <div class="col-lg-12 grid-margin stretch-card">
@@ -43,8 +57,9 @@
                 <div class="col-md-2">
                     <select name="kondisi" class="form-control">
                         <option value=""> Pilih Kondisi </option>
-                        <option value="baik" {{ request('kondisi') == 'baik' ? 'selected' : '' }}>Baik</option>
-                        <option value="rusak" {{ request('kondisi') == 'rusak' ? 'selected' : '' }}>Rusak</option>
+                        <option value="Baik" {{ request('kondisi') == 'Baik' ? 'selected' : '' }}>Baik</option>
+                        <option value="Rusak Ringan" {{ request('kondisi') == 'Rusak Ringan' ? 'selected' : '' }}>Rusak Ringan</option>
+                        <option value="Rusak Berat" {{ request('kondisi') == 'Rusak Berat' ? 'selected' : '' }}>Rusak Berat</option>
                     </select>
                 </div>
 

@@ -7,7 +7,8 @@
     .dashboard-card {
         border: none;
         border-radius: 1rem;
-        height: 180px;
+        height: 140px; /* 🔥 diperkecil dari 180px */
+        padding: 1rem 1.2rem; /* 🔥 padding disesuaikan */
         transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
@@ -15,29 +16,18 @@
     }
 
     .dashboard-card:hover {
-        transform: translateY(-6px);
+        transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     /* 💙 Tema biru untuk semua kartu */
-    .dashboard-bg-primary {
-        background: linear-gradient(135deg, #007bff, #0056b3);
-    }
-
-    .dashboard-bg-success {
-        background: linear-gradient(135deg, #33b1ff, #007bff);
-    }
-
-    .dashboard-bg-info {
-        background: linear-gradient(135deg, #4dabf7, #1e90ff);
-    }
-
-    .dashboard-bg-warning {
-        background: linear-gradient(135deg, #80d0ff, #33b1ff);
-    }
+    .dashboard-bg-primary { background: linear-gradient(135deg, #007bff, #0056b3); }
+    .dashboard-bg-success { background: linear-gradient(135deg, #33b1ff, #007bff); }
+    .dashboard-bg-info { background: linear-gradient(135deg, #4dabf7, #1e90ff); }
+    .dashboard-bg-warning { background: linear-gradient(135deg, #80d0ff, #33b1ff); }
 
     .dashboard-title {
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* diperkecil */
         font-weight: 700;
         letter-spacing: 0.5px;
         text-transform: uppercase;
@@ -45,34 +35,32 @@
     }
 
     .dashboard-value {
-        font-size: 2rem;
+        font-size: 1.6rem; /* diperkecil */
         font-weight: 800;
-        margin-top: 0.25rem;
+        margin-top: 0.2rem;
     }
 
     .dashboard-icon {
-        font-size: 3rem;
-        opacity: 0.25;
+        font-size: 2.2rem;   
+        opacity: 0.22;
         position: absolute;
-        bottom: 15px;
-        right: 20px;
+        bottom: 10px;        
+        right: 12px;         
     }
 
     .progress {
         background: rgba(255, 255, 255, 0.2);
-        height: 6px;
+        height: 5px; 
         border-radius: 10px;
-        margin-top: 10px;
+        margin-top: 0.4rem;
     }
 
-    .progress-bar {
-        background-color: #fff;
-    }
+    .progress-bar { background-color: #fff; }
 
     .dashboard-wrapper {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
+        gap: 1.2rem;
         margin-bottom: 2rem;
     }
 
@@ -81,10 +69,16 @@
         border-radius: 1rem;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         background: #fff;
-        padding: 1.5rem;
-        max-width: 800px;
+        padding: 1rem;              
+        height: 250px;              
+        max-width: 700px;           
         margin: 0 auto;
         text-align: center;
+    }
+
+    #asetChart {
+        height: 180px !important;   
+        width: 100% !important;
     }
 
     .chart-title {
@@ -94,11 +88,24 @@
         font-size: 1rem;
     }
 
-    #asetChart {
-        height: 240px !important;
-        width: 100% !important;
+    .welcome-box {
+        background: #ffffff;
+        padding: 1.2rem 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+        border-left: 5px solid #4e73df;
+    }
+    .welcome-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #4e73df;
     }
 </style>
+
+<div class="welcome-box">
+    <div class="welcome-text">👋 Selamat datang kembali, <strong>{{ Auth::user()->username }}</strong>!</div>
+</div>
 
 <div class="dashboard-wrapper">
 
@@ -154,13 +161,12 @@
 
 </div>
 
-<!-- 📊 Grafik Kecil -->
+<!-- 📊 Grafik Compact -->
 <div class="chart-card">
     <div class="chart-title">📈 Statistik Aset & Peminjaman</div>
     <canvas id="asetChart"></canvas>
 </div>
 
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('asetChart').getContext('2d');
@@ -178,10 +184,10 @@ new Chart(ctx, {
                 {{ $menungguKonfirmasi }}
             ],
             backgroundColor: [
-                'rgba(0, 123, 255, 0.8)',   // Biru utama
-                'rgba(51, 153, 255, 0.8)',  // Biru lembut
-                'rgba(0, 105, 217, 0.8)',   // Biru gelap
-                'rgba(102, 178, 255, 0.8)'  // Biru pastel
+                'rgba(0, 123, 255, 0.8)',
+                'rgba(51, 153, 255, 0.8)',
+                'rgba(0, 105, 217, 0.8)',
+                'rgba(102, 178, 255, 0.8)'
             ],
             borderColor: [
                 '#0056b3',
@@ -224,4 +230,5 @@ new Chart(ctx, {
     }
 });
 </script>
+
 @endsection

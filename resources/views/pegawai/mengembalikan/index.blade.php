@@ -1,5 +1,18 @@
 @extends('template_pegawai.layouts')
 
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 <div class="container mt-4">
     <h2 class="fw-bold mb-4"><i class="bi bi-arrow-return-left"></i> Data Pengembalian</h2>

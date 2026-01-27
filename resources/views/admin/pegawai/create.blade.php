@@ -1,5 +1,19 @@
 @extends('template.layouts')
 @section('title', 'Tambah Pegawai')
+
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 
 <div class="card">

@@ -1,5 +1,18 @@
 @extends('template_pegawai.layouts')
 
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">

@@ -2,6 +2,19 @@
 
 @section('title', 'data kategori aset')
 
+<style>
+    .container {
+    color: #000;
+
+    }   
+
+    .table td,
+    .table th {
+        color: #000 !important;
+    }
+
+</style>
+
 @section('konten')
 <div class="card">
   <div class="card-body">
