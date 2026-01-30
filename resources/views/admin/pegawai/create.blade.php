@@ -148,14 +148,14 @@
                     @enderror
                 </div>
 
-                <!-- Foto -->
+                <!-- Foto
                 <div class="col-md-6 mt-3">
                     <label>Foto</label>
                     <input type="file" name="foto" class="form-control">
                     @error('foto')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
-                </div>
+                </div> -->
 
             </div>
 

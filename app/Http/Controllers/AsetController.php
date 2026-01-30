@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Aset;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AsetExport;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -36,14 +35,16 @@ class AsetController extends Controller
             'kondisi' => 'required|string',
             'lokasi' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategoris,id',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->only(['nama', 'status', 'kondisi', 'lokasi', 'kategori_id']);
 
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('aset_foto', 'public');
-            $data['foto'] = $path;
+            $nm = $request->file('foto');
+            $namaFile = time() . '_' . $nm->getClientOriginalName();
+            $nm->move(public_path('/foto'), $namaFile);
+            $data['foto'] = $namaFile;
         }
 
         Aset::create($data);
@@ -70,17 +71,21 @@ class AsetController extends Controller
             'kondisi' => 'required|string',
             'lokasi' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategoris,id',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->only(['nama', 'status', 'kondisi', 'lokasi', 'kategori_id']);
 
         if ($request->hasFile('foto')) {
-            if ($aset->foto && Storage::disk('public')->exists($aset->foto)) {
-                Storage::disk('public')->delete($aset->foto);
+            // Hapus foto lama jika ada
+            if ($aset->foto && file_exists(public_path('/foto/' . $aset->foto))) {
+                unlink(public_path('/foto/' . $aset->foto));
             }
-            $path = $request->file('foto')->store('aset_foto', 'public');
-            $data['foto'] = $path;
+
+            $nm = $request->file('foto');
+            $namaFile = time() . '_' . $nm->getClientOriginalName();
+            $nm->move(public_path('/foto'), $namaFile);
+            $data['foto'] = $namaFile;
         }
 
         $aset->update($data);
@@ -90,8 +95,8 @@ class AsetController extends Controller
 
     public function destroy(Aset $aset)
     {
-        if ($aset->foto && Storage::disk('public')->exists($aset->foto)) {
-            Storage::disk('public')->delete($aset->foto);
+        if ($aset->foto && file_exists(public_path('/foto/' . $aset->foto))) {
+            unlink(public_path('/foto/' . $aset->foto));
         }
 
         $aset->delete();
@@ -106,64 +111,51 @@ class AsetController extends Controller
     public function exportExcel()
     {
         return Excel::download(new AsetExport, 'data-aset.xlsx');
-
-        $filters = $request->only(['kategori_id', 'status', 'kondisi', 'lokasi']);
-
-        return Excel::download(new AsetExport($filters), 'data-aset.xlsx');
     }
 
     public function exportPDF(Request $request)
     {
         $query = Aset::query();
 
-    // Terapkan filter
-    if ($request->kategori_id && $request->kategori_id != '') {
-        $query->where('kategori_id', $request->kategori_id);
-    }
-    if ($request->status && $request->status != '') {
-        $query->where('status', $request->status);
-    }
-    if ($request->kondisi && $request->kondisi != '') {
-        $query->where('kondisi', $request->kondisi);
-    }
-    if ($request->lokasi && $request->lokasi != '') {
-        $query->where('lokasi', 'like', '%' . $request->lokasi . '%');
-    }
+        if ($request->kategori_id && $request->kategori_id != '') {
+            $query->where('kategori_id', $request->kategori_id);
+        }
+        if ($request->status && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+        if ($request->kondisi && $request->kondisi != '') {
+            $query->where('kondisi', $request->kondisi);
+        }
+        if ($request->lokasi && $request->lokasi != '') {
+            $query->where('lokasi', 'like', '%' . $request->lokasi . '%');
+        }
 
-    $asets = $query->with('kategori')->get();
+        $asets = $query->with('kategori')->get();
 
-    $pdf = PDF::loadView('admin.aset.pdf', compact('asets'));
-    return $pdf->download('data-aset.pdf');
+        $pdf = PDF::loadView('admin.aset.pdf', compact('asets'));
+        return $pdf->download('data-aset.pdf');
     }
 
     public function filter(Request $request)
-{
-    $query = Aset::query();
+    {
+        $query = Aset::query();
 
-    // Filter berdasarkan kategori
-    if ($request->kategori_id && $request->kategori_id != '') {
-        $query->where('kategori_id', $request->kategori_id);
+        if ($request->kategori_id && $request->kategori_id != '') {
+            $query->where('kategori_id', $request->kategori_id);
+        }
+        if ($request->status && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+        if ($request->kondisi && $request->kondisi != '') {
+            $query->where('kondisi', $request->kondisi);
+        }
+        if ($request->lokasi && $request->lokasi != '') {
+            $query->where('lokasi', 'like', '%' . $request->lokasi . '%');
+        }
+
+        $asets = $query->with('kategori')->get();
+        $kategoris = Kategori::all();
+
+        return view('admin.aset.index', compact('asets', 'kategoris'));
     }
-
-    // Filter berdasarkan status
-    if ($request->status && $request->status != '') {
-        $query->where('status', $request->status);
-    }
-
-    // Filter berdasarkan kondisi
-    if ($request->kondisi && $request->kondisi != '') {
-        $query->where('kondisi', $request->kondisi);
-    }
-
-    // Filter berdasarkan lokasi
-    if ($request->lokasi && $request->lokasi != '') {
-        $query->where('lokasi', 'like', '%' . $request->lokasi . '%');
-    }
-
-    $asets = $query->with('kategori')->get();
-    $kategoris = Kategori::all();
-
-    return view('admin.aset.index', compact('asets', 'kategoris'));
-}
-
 }

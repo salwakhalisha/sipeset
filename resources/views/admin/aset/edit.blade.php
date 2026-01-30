@@ -93,3 +93,88 @@
 </div>
 </div>
 @endsection
+
+<!-- @extends('template.layouts')
+@section('title', 'Edit Aset')
+
+@section('konten')
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit Aset</h4>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('aset.update', $aset->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                    <label>Nama Aset</label>
+                    <input type="text" name="nama" class="form-control" value="{{ old('nama', $aset->nama) }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" class="form-control">
+                        <option value=""> Pilih Status </option>
+                        <option value="Tersedia" {{ old('status', $aset->status)=='Tersedia' ? 'selected' : '' }}>Tersedia</option>
+                        <option value="Diperbaiki" {{ old('status', $aset->status)=='Diperbaiki' ? 'selected' : '' }}>Diperbaiki</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Kondisi</label>
+                    <select name="kondisi" class="form-control">
+                        <option value=""> Pilih Kondisi </option>
+                        <option value="Baik" {{ old('kondisi', $aset->kondisi)=='Baik' ? 'selected' : '' }}>Baik</option>
+                        <option value="Rusak Ringan" {{ old('kondisi', $aset->kondisi)=='Rusak Ringan' ? 'selected' : '' }}>Rusak Ringan</option>
+                        <option value="Rusak Berat" {{ old('kondisi', $aset->kondisi)=='Rusak Berat' ? 'selected' : '' }}>Rusak Berat</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Lokasi</label>
+                    <input type="text" name="lokasi" class="form-control" value="{{ old('lokasi', $aset->lokasi) }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select name="kategori_id" class="form-control">
+                        <option value=""> Pilih Kategori </option>
+                        @foreach($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}" {{ old('kategori_id', $aset->kategori_id)==$kategori->id ? 'selected' : '' }}>
+                                {{ $kategori->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Foto</label>
+                    <input type="file" name="foto" class="form-control">
+                    <small class="text-muted">Kosongkan jika tidak ingin mengganti foto.</small>
+
+                    @if($aset->foto && file_exists(public_path('/foto/' . $aset->foto)))
+                        <div class="mt-2">
+                            <p>Foto Saat Ini:</p>
+                            <img src="{{ asset('foto/'.$aset->foto) }}" alt="Foto Aset" style="max-width:150px; border:1px solid #ccc; padding:5px;">
+                        </div>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('aset.index') }}" class="btn btn-secondary">Batal</a>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection -->

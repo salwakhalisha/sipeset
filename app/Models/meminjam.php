@@ -15,8 +15,12 @@ class Meminjam extends Model
         'aset_id',
         'pegawai_id',
         'status',
-        'tanggal',
+        'tanggal_pinjam',
+        'tanggal_kembali',
+        'batas_kembali',
+        'hari_telat',
         'keterangan',
+        'foto'
     ];
 
     public function aset()
@@ -27,11 +31,6 @@ class Meminjam extends Model
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class);
-    }
-
-    public function mengembalikan()
-    {
-        return $this->hasOne(Mengembalikan::class);
     }
 
     public function scopeConfirmedAndNotReturned($query)

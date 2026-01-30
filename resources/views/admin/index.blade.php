@@ -88,24 +88,7 @@
         font-size: 1rem;
     }
 
-    .welcome-box {
-        background: #ffffff;
-        padding: 1.2rem 1.5rem;
-        border-radius: 1rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        margin-bottom: 1.5rem;
-        border-left: 5px solid #4e73df;
-    }
-    .welcome-text {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #4e73df;
-    }
 </style>
-
-<div class="welcome-box">
-    <div class="welcome-text">👋 Selamat datang kembali, <strong>{{ Auth::user()->username }}</strong>!</div>
-</div>
 
 <div class="dashboard-wrapper">
 

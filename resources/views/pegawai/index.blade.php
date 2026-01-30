@@ -108,11 +108,6 @@
     }
 </style>
 
-<!-- 🟦✨ NEW: Ucapan Selamat Datang -->
-<div class="welcome-box">
-    <div class="welcome-text">👋 Selamat datang kembali, <strong>{{ Auth::user()->username }}</strong>!</div>
-</div>
-
 <div class="dashboard-wrapper">
 
     <!-- Dipinjam -->
@@ -125,18 +120,6 @@
             </div>
         </div>
         <i class="fas fa-clipboard-list dashboard-icon"></i>
-    </div>
-
-    <!-- Dikembalikan -->
-    <div class="card dashboard-card dashboard-bg-dikembalikan shadow-sm">
-        <div>
-            <div class="dashboard-title">Total Aset Dikembalikan</div>
-            <div class="dashboard-value">{{ $totalDikembalikan }}</div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 75%"></div>
-            </div>
-        </div>
-        <i class="fas fa-archive dashboard-icon"></i>
     </div>
 
     <!-- Menunggu Konfirmasi -->
@@ -183,7 +166,6 @@ new Chart(ctx, {
             label: 'Jumlah',
             data: [
                 {{ $totalDipinjam }},
-                {{ $totalDikembalikan }},
                 {{ $menungguKonfirmasi }},
                 {{ $jumlahDitolak }}
             ],

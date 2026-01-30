@@ -7,13 +7,14 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MeminjamController;
 use App\Http\Controllers\UnitkerjaController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\MengembalikanController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\PegawaiPasswordController;
 use App\Http\Controllers\Admin\KonfirmasiController;
 use App\Http\Controllers\DashboardPegawaiController;
-use App\Http\Controllers\Pegawai\MeminjamController;
 
 Route::get('/dashboardadmin', [DashboardAdminController::class, 'dashboard'])->name('dashboard.admin');
 Route::get('/index', [DashboardAdminController::class, 'dashboard'])->name('index');
@@ -76,21 +77,19 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     // Pegawai
-    Route::get('/meminjam', [MeminjamController::class, 'index'])->name('pegawai.meminjam.index');
-    Route::get('/meminjam/create', [MeminjamController::class, 'create'])->name('pegawai.meminjam.create');
-    Route::post('/meminjam', [MeminjamController::class, 'store'])->name('pegawai.meminjam.store');
+    Route::get('/meminjam', [MeminjamController::class, 'index'])->name('meminjam.index');
+    Route::get('/meminjam/create', [MeminjamController::class, 'create'])->name('meminjam.create');
+    Route::post('/meminjam', [MeminjamController::class, 'store'])->name('meminjam.store');
 
     Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('admin.konfirmasi.index');
     Route::put('/konfirmasi/{id}', [KonfirmasiController::class, 'update'])->name('admin.konfirmasi.update');
 });
 
+Route::get('/mengembalikan', [MengembalikanController::class, 'index'])->name('mengembalikan.index');
+
 Route::get('aset/export/excel', [AsetController::class, 'exportExcel'])->name('aset.export.excel');
 Route::get('aset/export/pdf', [AsetController::class, 'exportPDF'])->name('aset.export.pdf');
 Route::get('/aset/filter', [AsetController::class, 'filter'])->name('aset.filter');
 
-Route::get('/mengembalikan', [MengembalikanController::class, 'index'])->name('mengembalikan.index');
-Route::get('/mengembalikan/create', [MengembalikanController::class, 'create'])->name('mengembalikan.create');
-Route::post('/mengembalikan', [MengembalikanController::class, 'store'])->name('mengembalikan.store');
-Route::get('/mengembalikan/{mengembalikan}/edit', [MengembalikanController::class, 'edit'])->name('mengembalikan.edit');
-Route::put('/mengembalikan/{mengembalikan}', [MengembalikanController::class, 'update'])->name('mengembalikan.update');
-Route::delete('/mengembalikan/{mengembalikan}', [MengembalikanController::class, 'destroy'])->name('mengembalikan.destroy');
+Route::post('/pengembalian/{id}', [PengembalianController::class, 'store'])
+    ->name('pengembalian.store');

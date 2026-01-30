@@ -28,7 +28,7 @@ class PegawaiController extends Controller
     {
 
         $validasi = $request->validate([
-        'nip' => 'required|unique:pegawais,nip',
+        'nip' => 'required|digits:18|unique:pegawais,nip',
         'nama' => 'required',
         'alamat' => 'required',
         'telp' => 'required',
@@ -40,8 +40,9 @@ class PegawaiController extends Controller
         'unitkerja_id' => 'required',
         'foto' => 'nullable|file|image|mimes:jpg,jpeg,png|max:2048'
     ], [
-        'nip.required' => 'NIP harus diisi.',
+            
         'nip.unique' => 'NIP sudah digunakan.',
+        'nip.digits' => 'NIP harus terdiri dari 18 digit.',
         'nama.required' => 'Nama harus diisi.',
         'alamat.required' => 'Alamat harus diisi.',
         'telp.required' => 'Nomor HP harus diisi.',

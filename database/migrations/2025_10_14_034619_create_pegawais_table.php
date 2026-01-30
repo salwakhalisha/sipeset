@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nip',20);
+            $table->string('nip',18)->unique();
             $table->string('nama',100);
             $table->text('alamat');
             $table->string('telp',15);

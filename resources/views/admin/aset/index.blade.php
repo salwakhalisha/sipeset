@@ -83,6 +83,7 @@
                             <th>Status</th>
                             <th>Lokasi</th>
                             <th>Kondisi</th>
+                            <th>Foto</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -95,6 +96,13 @@
                                 <td>{{ $at->status }}</td>
                                 <td>{{ $at->lokasi }}</td>
                                 <td>{{ $at->kondisi }}</td>
+                                <td>
+                                    @if(!empty($at->foto))
+                                        <img src="{{ asset($at->foto) }}" alt="Foto" width="60">
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('aset.edit', $at->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('aset.delete', $at->id) }}" method="POST" class="d-inline">
